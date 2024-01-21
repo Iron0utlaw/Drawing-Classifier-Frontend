@@ -15,15 +15,25 @@ const App = () => {
     formData.append('image', blob);
 
     try {
-      const response = await axios.post('https://drawing-classifier.onrender.com/upload', formData, {
+      // Upload the image
+      const responseUpload = await axios.post('https://drawing-classifier.onrender.com/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
-      setImageUrl(response.data.imageUrl);
+      setImageUrl(responseUpload.data.imageUrl);
+
+      // Retrieve the uploaded image
+      const responseGetImage = await axios.get('https://drawing-classifier.onrender.com/get_uploaded_image', {
+        responseType: 'blob', // Ensure the response is treated as a blob
+      });
+
+      // Create a URL for the blob and set it as the image URL
+      const blobUrl = URL.createObjectURL(responseGetImage.data);
+      setImageUrl(blobUrl);
     } catch (error) {
-      console.error('Error uploading image:', error);
+      console.error('Error uploading or retrieving image:', error);
     }
   };
 
