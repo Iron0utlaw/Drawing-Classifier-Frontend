@@ -24,7 +24,7 @@ const App = () => {
       {loading ? (
         <Spinner color='white' />
       ) : (
-        <div className="animate-slide-up">
+        <div className="animate-slide-up w-[90%] md:w-[50%] h-screen">
           <Home />
         </div>
       )}

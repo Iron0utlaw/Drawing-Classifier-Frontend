@@ -39,7 +39,7 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
   const startDrawing = (e) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    const { offsetX, offsetY } = e.nativeEvent;
+    const { offsetX, offsetY } = getCoordinates(e);
 
     context.beginPath();
     context.moveTo(offsetX, offsetY);
@@ -51,7 +51,7 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
 
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    const { offsetX, offsetY } = e.nativeEvent;
+    const { offsetX, offsetY } = getCoordinates(e);
 
     context.lineTo(offsetX, offsetY);
     context.lineWidth = 5;
@@ -60,6 +60,18 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
 
   const stopDrawing = () => {
     setIsDrawing(false);
+  };
+
+  const getCoordinates = (e) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    return {
+      offsetX: clientX - rect.left,
+      offsetY: clientY - rect.top,
+    };
   };
 
   return (
@@ -71,6 +83,9 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
       onMouseMove={draw}
       onMouseUp={stopDrawing}
       onMouseOut={stopDrawing}
+      onTouchStart={startDrawing}
+      onTouchMove={draw}
+      onTouchEnd={stopDrawing}
       style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
     />
   );

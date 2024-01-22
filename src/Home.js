@@ -41,7 +41,7 @@ const Home = () => {
       setLoading(true);
       await axios.get(`${baseURL}/train`);
       setLoading(false);
-      setTrained(true)
+      setTrained(true);
     } catch (error) {
       console.log(error);
     }
@@ -69,34 +69,55 @@ const Home = () => {
   };
 
   return (
-    <div className="flex bg-black justify-center items-center h-screen">
-      <div className="flex bg-white p-10 rounded-xl flex-row gap-60">
+    <div className="flex flex-col bg-black justify-center items-center h-screen">
+      <div className="flex flex-col w-[90%] md:w-[80%] bg-white p-5 md:p-10 rounded-xl gap-4 mx-auto">
         <Canvas ref={canvasRef} />
-        <div className="flex flex-col justify-around">
-          <div
-            className="grid grid-cols-3 gap-4"
-            style={{ gridTemplateColumns: "min-content min-content" }}
-          >
-            <Button colorScheme="blue" onClick={() => handleButtonClick("uploadA")}>
-              Upload Image A
+        <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Button
+              colorScheme="blue"
+              onClick={() => handleButtonClick("uploadA")}
+            >
+              Upload A
             </Button>
-            <Button colorScheme="blue" onClick={() => handleButtonClick("uploadB")}>
-              Upload Image B
+            <Button
+              colorScheme="blue"
+              onClick={() => handleButtonClick("uploadB")}
+            >
+              Upload B
             </Button>
-            <Button colorScheme="blue" onClick={() => handleButtonClick("uploadC")}>
-              Upload Image C
+            <Button
+              colorScheme="blue"
+              onClick={() => handleButtonClick("uploadC")}
+            >
+              Upload C
             </Button>
-            <Button colorScheme="blue" onClick={clear}>Clear</Button>
-            <Button isLoading={loading} colorScheme="green" onClick={handleButtonClickTrain}>
+            <Button colorScheme="blue" onClick={clear}>
+              Clear
+            </Button>
+            <Button
+              isLoading={loading}
+              colorScheme="green"
+              onClick={handleButtonClickTrain}
+            >
               {loading ? "Training..." : "Train"}
             </Button>
-            <Button isDisabled={!train} colorScheme="green" onClick={UploadPred}>Predict</Button>
+            <Button
+              isDisabled={!train}
+              colorScheme="green"
+              onClick={UploadPred}
+            >
+              Predict
+            </Button>
           </div>
-          <Text border='2px' borderColor='gray.200' className="h-20 p-5">Prediction: {predictionStatus}</Text>
+          <Text border="2px" borderColor="gray.200" className="h-20 p-3">
+            Most Probably: {predictionStatus}
+          </Text>
         </div>
       </div>
     </div>
   );
+  
 };
 
 export default Home;
