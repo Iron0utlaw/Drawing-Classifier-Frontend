@@ -37,6 +37,7 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
   }));
 
   const startDrawing = (e) => {
+    e.preventDefault();
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     const { offsetX, offsetY } = getCoordinates(e);
@@ -47,6 +48,7 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
   };
 
   const draw = (e) => {
+    e.preventDefault();
     if (!isDrawing) return;
 
     const canvas = canvasRef.current;
