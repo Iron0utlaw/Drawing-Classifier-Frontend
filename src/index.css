@@ -1,3 +1,18 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0%;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 100%;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 1s ease-in-out;
+}

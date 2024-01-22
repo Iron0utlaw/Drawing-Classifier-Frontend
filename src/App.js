@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Home from './Home';
+import { Spinner } from '@chakra-ui/react';
 
 const App = () => {
-  const [loading,setLoading] = useState(true)
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const checkBackendStatus = async () => {
       try {
@@ -15,9 +17,18 @@ const App = () => {
 
     checkBackendStatus();
   }, []);
-  return <>
-    {loading ? <>Loading</> : <Home/>}
-  </>
+
+  return (
+    <div className="flex bg-black items-center justify-center h-screen">
+      {loading ? (
+        <Spinner color='white' />
+      ) : (
+        <div className="animate-slide-up">
+          <Home />
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default App;

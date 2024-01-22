@@ -1,4 +1,9 @@
-import React, { useRef, useState, forwardRef, useImperativeHandle } from 'react';
+import React, {
+  useRef,
+  useState,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 
 const Canvas = forwardRef(({ onImageReady }, ref) => {
   const canvasRef = useRef(null);
@@ -8,12 +13,12 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
     getImageBlob: async () => {
       return new Promise((resolve) => {
         const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
-        const tempCanvas = document.createElement('canvas');
-        const tempContext = tempCanvas.getContext('2d');
+        const context = canvas.getContext("2d");
+        const tempCanvas = document.createElement("canvas");
+        const tempContext = tempCanvas.getContext("2d");
         tempCanvas.width = canvas.width;
         tempCanvas.height = canvas.height;
-        tempContext.fillStyle = 'white';
+        tempContext.fillStyle = "white";
         tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
         tempContext.drawImage(canvas, 0, 0);
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -24,11 +29,16 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
         });
       });
     },
+    clearCanvas: () => {
+      const canvas = canvasRef.current;
+      const context = canvas.getContext("2d");
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    },
   }));
 
   const startDrawing = (e) => {
     const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
     const { offsetX, offsetY } = e.nativeEvent;
 
     context.beginPath();
@@ -40,7 +50,7 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
     if (!isDrawing) return;
 
     const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
     const { offsetX, offsetY } = e.nativeEvent;
 
     context.lineTo(offsetX, offsetY);
@@ -61,7 +71,7 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
       onMouseMove={draw}
       onMouseUp={stopDrawing}
       onMouseOut={stopDrawing}
-      style={{ border: '10px solid #000' }}
+      style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
     />
   );
 });
