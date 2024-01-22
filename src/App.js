@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Home from './Home';
 import { Spinner } from '@chakra-ui/react';
+import axios from 'axios';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -8,7 +9,7 @@ const App = () => {
   useEffect(() => {
     const checkBackendStatus = async () => {
       try {
-        await fetch('https://drawing-classifier.onrender.com/');
+        await axios.get('https://drawing-classifier.onrender.com/');
         setLoading(false);
       } catch (error) {
         console.error('Backend is not live:', error);
