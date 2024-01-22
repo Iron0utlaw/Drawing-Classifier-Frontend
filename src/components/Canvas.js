@@ -56,8 +56,8 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
   return (
     <canvas
       ref={canvasRef}
-      width={800}
-      height={600}
+      width={500}
+      height={500}
       onMouseDown={startDrawing}
       onMouseMove={draw}
       onMouseUp={stopDrawing}
