@@ -3,7 +3,7 @@ import Home from './Home';
 import { Spinner } from '@chakra-ui/react';
 
 const App = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkBackendStatus = async () => {
