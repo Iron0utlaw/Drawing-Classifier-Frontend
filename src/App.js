@@ -8,7 +8,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
 
   // Define the base URL based on the environment
-  const baseURL = process.env.VERCEL_ENV === 'production'
+  const baseURL = process.env.NODE_ENV === 'production'
     ? 'https://drawing-classifier.onrender.com'
     : 'http://127.0.0.1:5000';
 
