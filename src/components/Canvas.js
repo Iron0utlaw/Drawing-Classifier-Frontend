@@ -1,4 +1,3 @@
-// src/components/Canvas.js
 import React, { useRef, useState, forwardRef, useImperativeHandle } from 'react';
 
 const Canvas = forwardRef(({ onImageReady }, ref) => {
