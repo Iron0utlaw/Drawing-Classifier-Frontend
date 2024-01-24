@@ -9,7 +9,7 @@ const App = () => {
   useEffect(() => {
     const checkBackendStatus = async () => {
       try {
-        await axios.get('https://drawing-classifier.onrender.com/');
+        await axios.get('https://ironoutlaw.pythonanywhere.com/');
         setLoading(false);
       } catch (error) {
         console.error('Backend is not live:', error);
