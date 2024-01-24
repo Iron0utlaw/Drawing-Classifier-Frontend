@@ -69,12 +69,17 @@ const Canvas = forwardRef(({ onImageReady }, ref) => {
     const rect = canvas.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
+  
+    // Calculate coordinates relative to the canvas
+    const offsetX = clientX - rect.left;
+    const offsetY = clientY - rect.top;
+  
     return {
-      offsetX: clientX - rect.left,
-      offsetY: clientY - rect.top,
+      offsetX,
+      offsetY,
     };
   };
+  
 
   return (
     <canvas
